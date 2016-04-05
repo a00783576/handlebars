@@ -1,13 +1,7 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var app = express();
-var fortunes = [
-"Test 1",
-"Test 2",
-"Test 3",
-"Test 4",
-"Test 5"
-];
+var fortune = require('./lib/fortuneCookies.js');
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -19,7 +13,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/about', function(req, res){
-	var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+	var randomFortune = {fortune: fortune.getFortune}()};
 	res.render('about', {fortune: randomFortune});
 });
 
